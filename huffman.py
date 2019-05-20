@@ -51,3 +51,15 @@ def cnt_freq(filename):
             # add 1 to index of current character
             freqlist[ord(char)] += 1
     return freqlist
+
+
+
+
+
+
+
+
+
+# NOTE =============================================================================================
+
+    # don't need HuffmanTree wrapper class
