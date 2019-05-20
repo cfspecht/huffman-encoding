@@ -6,7 +6,12 @@ Author:
 
 
 class Node:
-    """Write docstring for this class
+    """ Huffman Node, can be either None or Node
+    Attributes:
+        freq (int): frequency of the character
+        data (str): the character
+        left (Node/NoneType): left child
+        right (Node/NoneType): right child
     """
     def __init__(self, frequency, letter=None, left=None, right=None):
         self.freq = frequency
@@ -15,10 +20,15 @@ class Node:
         self.right = right
 
     def __repr__(self):
-        pass
+        return "HuffmanNode {data: %s, letter: %s, left: %s, right: %s}" % (self.freq, self.data, \
+                                                                            self.left, self.right)
 
     def __eq__(self, other):
-        pass
+        return isinstance(other, Node) and \
+               self.freq == other.freq and \
+               self.data == other.data and \
+               self.left == other.left and \
+               self.right == other.right
 
 
 def cnt_freq(filename):
@@ -34,5 +44,13 @@ def cnt_freq(filename):
 
     # read target file
     fp = open(filename, "r")
-    lines = fp.readlines()
-    fp.close()
+    lines = fp.readlines() # list of lines separated by \n
+    fp.close()             # looks like ["onelinehere"]
+
+    # iterate through each character in each line
+    for line in lines:
+        for char in line:
+            # add 1 to index of current character
+            freqlist[ord(char)] += 1
+
+    return freqlist
