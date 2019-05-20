@@ -1,3 +1,3 @@
 # huffman-encoding
-# Project 3
-# CPE 202
+  Project 3
+  CPE 202
