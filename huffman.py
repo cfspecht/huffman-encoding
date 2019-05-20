@@ -1,9 +1,10 @@
-"""Huffman Coding
-CPE202
-
+""" Project 3: Huffman Coding
+CPE202-09
 Author:
-    Put your name here
+    Chris Specht
 """
+
+
 class Node:
     """Write docstring for this class
     """
