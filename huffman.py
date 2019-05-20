@@ -24,7 +24,7 @@ class Node:
                                                                             self.left, self.right)
 
     def __eq__(self, other):
-        return isinstance(other, Node) and \
+        return isinstance(other, type(self)) and \
                self.freq == other.freq and \
                self.data == other.data and \
                self.left == other.left and \
@@ -41,16 +41,13 @@ def cnt_freq(filename):
     """
     # initialize empty list of size 256
     freqlist = [0] * 256
-
     # read target file
     fp = open(filename, "r")
     lines = fp.readlines() # list of lines separated by \n
     fp.close()             # looks like ["onelinehere"]
-
     # iterate through each character in each line
     for line in lines:
         for char in line:
             # add 1 to index of current character
             freqlist[ord(char)] += 1
-
     return freqlist
