@@ -31,6 +31,37 @@ class Node:
                self.right == other.right
 
 
+# If the tree is larger than one node, compare the frequencies of the
+# root nodes and use the letter with the smallest ASCII value in the two nodes as a
+# tiebreaker. 
+# TODO Store the smallest letter in the new node???
+def comes_before(a, b):
+        """ Returns True if tree "a" comes before tree "b"
+        In other words, if frequency of "a" < frequency of "b"
+        Args:
+            a (Node/NoneType): tree "a"
+            b (Node/NoneType): tree "b"
+        Returns:
+            bool: True if tree "a" comes before tree "b", else False
+        """
+        # if one or both trees are larger than one node
+            # TODO write code
+
+        # if tree a comes before tree b, a occurence < b occurence
+        if a.freq < b.freq:
+            return True
+        # if tree a comes after tree b, a occurence > b occurence
+        elif a.freq > b.freq:
+            return False
+
+        
+        # if a occurence equals b occurence
+        elif ord(a.data) < ord(b.data): # if a comes before b
+            return True
+        elif ord(a.data) > ord(b.data): # if a comes after b
+            return False
+
+
 def cnt_freq(filename):
     """ Opens a text file and counts frequency of occurrences of all characters
     Index of a list is the ord() of a character
@@ -52,6 +83,15 @@ def cnt_freq(filename):
             freqlist[ord(char)] += 1
     return freqlist
 
+
+def create_huff_tree(freqlist):
+    """ Builds and returns a Huffman tree from a given list of frequencies
+    Args:
+        freqlist (list): list of frequencies from cnt_freq()
+    Returns:
+        Node: root node of created Huffman tree
+    """
+    pass
 
 
 
