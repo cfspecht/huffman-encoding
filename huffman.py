@@ -33,8 +33,7 @@ class Node:
 
 # If the tree is larger than one node, compare the frequencies of the
 # root nodes and use the letter with the smallest ASCII value in the two nodes as a
-# tiebreaker. 
-# TODO Store the smallest letter in the new node???
+# tiebreaker. Store the smallest letter in the new node???
 def comes_before(a, b):
         """ Returns True if tree "a" comes before tree "b"
         In other words, if frequency of "a" < frequency of "b"
