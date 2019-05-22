@@ -31,6 +31,10 @@ class Node:
                self.right == other.right
 
 
+class MinHeap:
+    pass
+
+
 # If the tree is larger than one node, compare the frequencies of the
 # root nodes and use the letter with the smallest ASCII value in the two nodes as a
 # tiebreaker. Store the smallest letter in the new node???
