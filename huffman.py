@@ -44,22 +44,17 @@ def comes_before(a, b):
         Returns:
             bool: True if tree "a" comes before tree "b", else False
         """
-        # if one or both trees are larger than one node
-            # TODO write code
-
         # if tree a comes before tree b, a occurence < b occurence
         if a.freq < b.freq:
             return True
         # if tree a comes after tree b, a occurence > b occurence
-        elif a.freq > b.freq:
+        if a.freq > b.freq:
             return False
-
-        
         # if a occurence equals b occurence
-        elif ord(a.data) < ord(b.data): # if a comes before b
+        if ord(a.data) < ord(b.data): # if a comes before b
             return True
-        elif ord(a.data) > ord(b.data): # if a comes after b
-            return False
+        # if a comes after b
+        return False
 
 
 def cnt_freq(filename):
