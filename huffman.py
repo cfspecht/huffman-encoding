@@ -20,9 +20,9 @@ class Node:
         self.right = right
 
     def __repr__(self):
-        # return "HuffmanNode {data: %s, letter: %s, left: %s, right: %s}" % (self.freq, self.data, \
-        #                                                                     self.left, self.right)
-        return "HuffmanNode {data: %s, letter: %s}" % (self.freq, self.data)                                                                    
+        return "HuffmanNode {freq: %s, data: %s, left: %s, right: %s}" % (self.freq, self.data, \
+                                                                            self.left, self.right)
+        # return "HuffmanNode {data: %s, letter: %s}" % (self.freq, self.data)                                                                    
 
     def __eq__(self, other):
         return isinstance(other, type(self)) and \
@@ -109,7 +109,7 @@ def create_huff_tree(freqlist):
     return node_heap.pop()
 
 
-def min_heapify(alist):
+def min_heapify(alist): # TESTED, works
     """ Min heapifies an unsorted list of Node objects
     Args:
         alist (list): list to be heapified
@@ -130,8 +130,8 @@ def insert(heap, node):
     """
     # append the new node
     heap.append(node)
-    # shift up, starting at index -1
-    shift_up(heap, -1)
+    # shift up, starting at index of last element
+    shift_up(heap, len(heap) - 1)
 
 
 def pop(heap):
@@ -185,7 +185,7 @@ def shift_up(heap, index):
     shift_up(heap, parent)
     
 
-def shift_down(heap, i, size):
+def shift_down(heap, i, size): # TESTED, works
     """ Shifts Node object at top of current heap to its proper place
     Args:
         heap (list): heap to be modified
@@ -216,3 +216,15 @@ def shift_down(heap, i, size):
 
     # base case is if current node has no children or node is in correct place
     return
+
+
+def main(): # for testing purposes
+
+    freqlist = cnt_freq("test1.txt")
+    node_heap = [Node(freqlist[i], chr(i)) for i in range(256) if freqlist[i] != 0]
+    min_heapify(node_heap)
+    print(node_heap)
+
+
+if __name__ == "__main__":
+    main()
