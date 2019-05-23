@@ -109,7 +109,7 @@ def create_huff_tree(freqlist):
     return node_heap.pop()
 
 
-def min_heapify(alist): # TESTED, works
+def min_heapify(alist):
     """ Min heapifies an unsorted list of Node objects
     Args:
         alist (list): list to be heapified
@@ -185,7 +185,7 @@ def shift_up(heap, index):
     shift_up(heap, parent)
     
 
-def shift_down(heap, i, size): # TESTED, works
+def shift_down(heap, i, size):
     """ Shifts Node object at top of current heap to its proper place
     Args:
         heap (list): heap to be modified
