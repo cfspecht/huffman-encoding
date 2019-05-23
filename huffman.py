@@ -109,6 +109,24 @@ def create_huff_tree(freqlist):
     return node_heap.pop()
 
 
+def create_code(root_node):
+    pass
+
+
+def huffman_encode(in_file, out_file):
+    pass
+
+
+def tree_preord(hufftree):
+    pass
+
+
+def huffman_decode(freqlist, encoded_file, decode_file):
+    pass
+
+
+# HELPER FUNCTIONS =================================================================================
+
 def min_heapify(alist):
     """ Min heapifies an unsorted list of Node objects
     Args:
