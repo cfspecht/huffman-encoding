@@ -51,21 +51,21 @@ class TestList(unittest.TestCase):
 
    def test_01_decodefile(self):
       freqlist = cnt_freq("test1.txt")
-      huffman_decode(freqlist,"encodetest1.txt", "decodetest1.txt")
+      huffman_decode(freqlist,"test1.out", "decodetest1.txt")
       # capture errors by running 'filecmp' on your encoded file
       # with a *known* solution file
       self.assertTrue(filecmp.cmp("decodetest1.txt", "test1.txt"))
 
    def test_02_decodefile(self):
-      freqlist = cnt_freq("test1.txt")
-      huffman_decode(freqlist,"encodetest2.txt", "decodetest2.txt")
+      freqlist = cnt_freq("test2.txt")
+      huffman_decode(freqlist,"test2.out", "decodetest2.txt")
       # capture errors by running 'filecmp' on your encoded file
       # with a *known* solution file
       self.assertTrue(filecmp.cmp("decodetest2.txt", "test2.txt"))
 
    def test_03_decodefile(self):
       freqlist = cnt_freq("test3.txt")
-      huffman_decode(freqlist, "encodetest3.txt", "decodetest3.txt")
+      huffman_decode(freqlist, "test3.out", "decodetest3.txt")
       # capture errors by running 'filecmp' on your encoded file
       # with a *known* solution file
       self.assertTrue(filecmp.cmp("decodetest3.txt", "test3.txt"))

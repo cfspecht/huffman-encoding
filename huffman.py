@@ -110,7 +110,39 @@ def create_huff_tree(freqlist):
 
 
 def create_code(root_node):
-    pass
+    """ Traverses Huffman tree recursively (preorder), creating a list of codes for each character
+    Args:
+        root_node (Node): Huffman tree
+    Returns:
+        list: list of huffman codes for each character, sorted by index
+    """
+    code_list = [""] * 256
+    create_code_helper(root_node, code_list, "")
+    return code_list
+
+
+def create_code_helper(root_node, code_list, accumulator):
+    """ Traverses Huffman tree recursively, adding individual codes to code_list
+    Args:
+        root_node (Node/NoneType): Huffman tree
+        code_list (list): list of Huffman codes
+        accumulator (str): accumulator variable for Huffman path
+    """
+    # if current node is none
+    if not root_node:
+        return
+
+    # check if current node is a leaf node
+    if not root_node.left and not root_node.right:
+        # add accumulator to code_list
+        code_list[ord(root_node.data)] = accumulator
+        # end this call
+        return
+
+    # traverse to the left
+    create_code_helper(root_node.left, code_list, accumulator + "0")
+    # traverse to the right
+    create_code_helper(root_node.right, code_list, accumulator + "1")
 
 
 def huffman_encode(in_file, out_file):
