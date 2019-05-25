@@ -146,7 +146,31 @@ def create_code_helper(root_node, code_list, accumulator):
 
 
 def huffman_encode(in_file, out_file):
-    pass
+    """ Takes input file, encodes it, and writes it to ouput file
+    Args:
+        in_file (str): path of input file to be encoded
+        out_file (str): desired path of resulting encoded output file
+    """
+    # process input file
+    freqlist = cnt_freq(in_file)
+    fp = open(in_file, "r")
+    raw_lines = fp.readlines() # list of lines (strings)
+    fp.close()
+
+    # create huffman coding tools
+    huff_tree = create_huff_tree(freqlist)
+    code_list = create_code(huff_tree)
+
+    # translate in_file into string of code
+    out_string = ""
+    for line in raw_lines:
+        for char in line:
+            out_string += code_list[ord(char)]
+
+    # write translation to the output file
+    fp = open(out_file, "w")
+    fp.write(out_string)
+    fp.close()
 
 
 def tree_preord(hufftree):
@@ -154,7 +178,37 @@ def tree_preord(hufftree):
 
 
 def huffman_decode(freqlist, encoded_file, decode_file):
-    pass
+    """ Decodes a given huffman encoded file
+    Args:
+        freqlist (list): list of character frequencies, indexed by ord(char)
+        encoded_file (str): path of encoded file to be decoded
+        decode_file (str): desired path of resulting decoded file
+    """
+    # open and read encoded file
+    fp = open(encoded_file, "r")
+    encoded_lines = fp.readlines()
+    fp.close()
+
+    # create code list to be used for decoding
+    huff_tree = create_huff_tree(freqlist)
+    code_list = create_code(huff_tree)
+
+    # read characters until any huffman code is found
+    # add resulting character to output string
+    accumulator = ""
+    out_string = ""
+    for num in encoded_lines[0]: # num is either "0" or "1"
+        accumulator += num
+        # if accumulator is a huffman code
+        if accumulator in code_list:
+            target_index = code_list.index(accumulator)
+            out_string += chr(target_index)
+            accumulator = ""
+
+    # write output string to output file
+    fp = open(decode_file, "w")
+    fp.write(out_string)
+    fp.close()
 
 
 # HELPER FUNCTIONS =================================================================================
