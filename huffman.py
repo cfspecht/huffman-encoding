@@ -174,6 +174,17 @@ def huffman_encode(in_file, out_file):
 
 
 def tree_preord(hufftree):
+    """ Traverses huffman tree (preorder) and produces an encoded tree description
+    Args:
+        hufftree (Node/NoneType): huffman tree node
+    Returns:
+        str: encoded tree description
+    """
+    # visit root
+    
+    # visit left
+
+    # visit right
     pass
 
 
