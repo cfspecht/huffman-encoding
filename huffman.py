@@ -86,23 +86,23 @@ class TreeTraversal:
             self.bit_stream += "-" + str(ord(hufftree.data)) + "-"
 
 
-def comes_before(a, b):
+def comes_before(tree_a, tree_b):
     """ Returns True if tree "a" comes before tree "b"
     In other words, if frequency of "a" < frequency of "b"
     Args:
-        a (Node/NoneType): tree "a"
-        b (Node/NoneType): tree "b"
+        tree_a (Node/NoneType): tree "a"
+        tree_b (Node/NoneType): tree "b"
     Returns:
         bool: True if tree "a" comes before tree "b", else False
     """
     # if tree a comes before tree b, a occurence < b occurence
-    if a.freq < b.freq:
+    if tree_a.freq < tree_b.freq:
         return True
     # if tree a comes after tree b, a occurence > b occurence
-    if a.freq > b.freq:
+    if tree_a.freq > tree_b.freq:
         return False
     # if a occurence equals b occurence
-    if ord(a.data) < ord(b.data): # if a comes before b
+    if ord(tree_a.data) < ord(tree_b.data): # if a comes before b
         return True
     # if a comes after b
     return False
@@ -367,7 +367,7 @@ def shift_up(heap, index):
     # swap nodes and recursively call on parent node
     heap[index], heap[parent] = heap[parent], heap[index]
     shift_up(heap, parent)
-    
+
 
 def shift_down(heap, i, size):
     """ Shifts Node object at top of current heap to its proper place
@@ -389,21 +389,21 @@ def shift_down(heap, i, size):
     if left_index < size and comes_before(heap[left_index], heap[root_index]):
         root_index = left_index
 
-    if right_index < size and comes_before(heap[right_index], heap[root_index]): # checks if right value is less than root value or left value
+    if right_index < size and comes_before(heap[right_index], heap[root_index]):
         root_index = right_index
 
     # if root index has changed, swap values
     if root_index != i:
         heap[root_index], heap[i] = heap[i], heap[root_index]
         # recursive call on subheap
-        shift_down(heap, root_index, size) 
+        shift_down(heap, root_index, size)
 
     # base case is if current node has no children or node is in correct place
     return
 
 
-def main(): # for testing purposes
-    pass
+# def main(): # for testing purposes
+#     pass
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
