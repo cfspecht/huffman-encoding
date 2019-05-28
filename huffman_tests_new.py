@@ -70,5 +70,10 @@ class TestList(unittest.TestCase):
       # with a *known* solution file
       self.assertTrue(filecmp.cmp("decodetest3.txt", "test3.txt"))
 
+   def test_tree_preord(self):
+      freqlist = cnt_freq("test4.txt")
+      test_tree = create_huff_tree(freqlist)
+      self.assertEqual(tree_preord(test_tree), "00001-97-1-102-1-98-1-99-1-100-")
+
 if __name__ == '__main__': 
    unittest.main()

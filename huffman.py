@@ -32,6 +32,40 @@ class Node:
                self.right == other.right
 
 
+class TreeTraversal:
+    """ Helper class to generate a pre-order representation of a Huffman tree
+    Attributes:
+        bit_stream (str): accumulator variable for pre-order traversal of the tree
+    """
+    def __init__(self):
+        self.bit_stream = ""
+
+    def __eq__(self, other):
+        return isinstance(other, type(self)) and \
+               self.bit_stream == other.bit_stream
+
+    def __repr__(self):
+        return self.bit_stream
+
+    def tree_preord_helper(self, hufftree):
+        """ Helper function for tree_preord()
+        Args:
+            hufftree (Node/NoneType): huffman tree being traversed
+        """
+        # if hufftree is none
+        if not hufftree:
+            return
+        # if self.hufftree has children
+        if hufftree.left or hufftree.right:
+            self.bit_stream += "0"
+            self.tree_preord_helper(hufftree.left)
+            self.tree_preord_helper(hufftree.right)
+        # if self.hufftree is leaf node
+        else:
+            self.bit_stream += "1"
+            self.bit_stream += "-" + str(ord(hufftree.data)) + "-"
+
+
 def comes_before(a, b):
     """ Returns True if tree "a" comes before tree "b"
     In other words, if frequency of "a" < frequency of "b"
@@ -180,12 +214,9 @@ def tree_preord(hufftree):
     Returns:
         str: encoded tree description
     """
-    # visit root
-    
-    # visit left
-
-    # visit right
-    pass
+    tree_traversal = TreeTraversal()
+    tree_traversal.tree_preord_helper(hufftree)
+    return str(tree_traversal)
 
 
 def huffman_decode(freqlist, encoded_file, decode_file):
@@ -335,10 +366,9 @@ def shift_down(heap, i, size):
 
 def main(): # for testing purposes
 
-    freqlist = cnt_freq("test1.txt")
-    node_heap = [Node(freqlist[i], chr(i)) for i in range(256) if freqlist[i] != 0]
-    min_heapify(node_heap)
-    print(node_heap)
+    freqlist = cnt_freq("test4.txt")
+    test_tree = create_huff_tree(freqlist)
+    print(tree_preord(test_tree))
 
 
 if __name__ == "__main__":
