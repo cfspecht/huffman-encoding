@@ -30,6 +30,20 @@ class Node:
                self.left == other.left and \
                self.right == other.right
 
+    def get_freq(self):
+        """ Returns frequency of current node
+        Returns:
+            int: frequency
+        """
+        return self.freq
+
+    def get_letter(self):
+        """ Returns character of current node
+        Returns:
+            str: character
+        """
+        return self.data
+
 
 class TreeTraversal:
     """ Helper class to generate a pre-order representation of a Huffman tree
@@ -44,6 +58,13 @@ class TreeTraversal:
                self.bit_stream == other.bit_stream
 
     def __repr__(self):
+        return str(self.bit_stream)
+
+    def get_bitstream(self):
+        """ Returns bitstream, for use in tree_preord()
+        Returns:
+            str: bit stream
+        """
         return self.bit_stream
 
     def tree_preord_helper(self, hufftree):
@@ -98,9 +119,9 @@ def cnt_freq(filename):
     # initialize empty list of size 256
     freqlist = [0] * 256
     # read target file
-    fp = open(filename, "r")
-    lines = fp.readlines() # list of lines separated by \n
-    fp.close()             # looks like ["onelinehere"]
+    file_pointer = open(filename, "r")
+    lines = file_pointer.readlines() # list of lines separated by \n
+    file_pointer.close()             # looks like ["onelinehere"]
     # iterate through each character in each line
     for line in lines:
         for char in line:
@@ -185,17 +206,17 @@ def huffman_encode(in_file, out_file):
         out_file (str): desired path of resulting encoded output file
     """
     # process input file
-    fp = open(in_file, "r")
-    raw_lines = fp.readlines() # list of lines (strings)
-    fp.close()
+    file_pointer = open(in_file, "r")
+    raw_lines = file_pointer.readlines() # list of lines (strings)
+    file_pointer.close()
     freqlist = cnt_freq(in_file)
 
     # if input file is empty
     if not raw_lines:
         out_str = ""
-        fp = open(out_file, "w")
-        fp.write(out_str)
-        fp.close()
+        file_pointer = open(out_file, "w")
+        file_pointer.write(out_str)
+        file_pointer.close()
         return
 
     # if input file is just one character, eg. ["aaaaa"]
@@ -203,9 +224,9 @@ def huffman_encode(in_file, out_file):
     if temp_line == len(temp_line) * temp_line[0]:
 
         out_str = "'%s' %s" % (temp_line[0], len(temp_line))
-        fp = open(out_file, "w")
-        fp.write(out_str)
-        fp.close()
+        file_pointer = open(out_file, "w")
+        file_pointer.write(out_str)
+        file_pointer.close()
         return
 
     # create huffman coding tools
@@ -219,9 +240,9 @@ def huffman_encode(in_file, out_file):
             out_string += code_list[ord(char)]
 
     # write translation to the output file
-    fp = open(out_file, "w")
-    fp.write(out_string)
-    fp.close()
+    file_pointer = open(out_file, "w")
+    file_pointer.write(out_string)
+    file_pointer.close()
 
 
 def tree_preord(hufftree):
@@ -244,9 +265,9 @@ def huffman_decode(freqlist, encoded_file, decode_file):
         decode_file (str): desired path of resulting decoded file
     """
     # open and read encoded file
-    fp = open(encoded_file, "r")
-    encoded_lines = fp.readlines()
-    fp.close()
+    file_pointer = open(encoded_file, "r")
+    encoded_lines = file_pointer.readlines()
+    file_pointer.close()
 
     # create code list to be used for decoding
     huff_tree = create_huff_tree(freqlist)
@@ -265,9 +286,9 @@ def huffman_decode(freqlist, encoded_file, decode_file):
             accumulator = ""
 
     # write output string to output file
-    fp = open(decode_file, "w")
-    fp.write(out_string)
-    fp.close()
+    file_pointer = open(decode_file, "w")
+    file_pointer.write(out_string)
+    file_pointer.close()
 
 
 # HELPER FUNCTIONS =================================================================================

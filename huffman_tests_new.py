@@ -84,9 +84,5 @@ class TestList(unittest.TestCase):
       self.assertEqual(tree_preord(test_tree), "00001-97-1-102-1-98-1-99-1-100-")
 
 
-   # ADDED EDGE CASES ==============================================================================
-
-
-
 if __name__ == '__main__': 
    unittest.main()
