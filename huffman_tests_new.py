@@ -49,6 +49,14 @@ class TestList(unittest.TestCase):
       # with a *known* solution file
       self.assertTrue(filecmp.cmp("encodetest3.txt", "test3.out"))
 
+   def test_04_encodefile(self):
+      huffman_encode("test5.txt", "encodetest5.txt")
+      self.assertTrue(filecmp.cmp("encodetest5.txt", "test5.out"))
+
+   def test_05_encodefile(self):
+      huffman_encode("test6.txt", "encodetest6.txt")
+      self.assertTrue(filecmp.cmp("encodetest6.txt", "test6.out"))
+
    def test_01_decodefile(self):
       freqlist = cnt_freq("test1.txt")
       huffman_decode(freqlist,"test1.out", "decodetest1.txt")
@@ -74,6 +82,11 @@ class TestList(unittest.TestCase):
       freqlist = cnt_freq("test4.txt")
       test_tree = create_huff_tree(freqlist)
       self.assertEqual(tree_preord(test_tree), "00001-97-1-102-1-98-1-99-1-100-")
+
+
+   # ADDED EDGE CASES ==============================================================================
+
+
 
 if __name__ == '__main__': 
    unittest.main()

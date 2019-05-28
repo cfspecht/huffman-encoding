@@ -22,7 +22,6 @@ class Node:
     def __repr__(self):
         return "HuffmanNode {freq: %s, data: %s, left: %s, right: %s}" % (self.freq, self.data, \
                                                                             self.left, self.right)
-        # return "HuffmanNode {data: %s, letter: %s}" % (self.freq, self.data)                                                                    
 
     def __eq__(self, other):
         return isinstance(other, type(self)) and \
@@ -186,10 +185,28 @@ def huffman_encode(in_file, out_file):
         out_file (str): desired path of resulting encoded output file
     """
     # process input file
-    freqlist = cnt_freq(in_file)
     fp = open(in_file, "r")
     raw_lines = fp.readlines() # list of lines (strings)
     fp.close()
+    freqlist = cnt_freq(in_file)
+
+    # if input file is empty
+    if not raw_lines:
+        out_str = ""
+        fp = open(out_file, "w")
+        fp.write(out_str)
+        fp.close()
+        return
+
+    # if input file is just one character, eg. ["aaaaa"]
+    temp_line = raw_lines[0]
+    if temp_line == len(temp_line) * temp_line[0]:
+
+        out_str = "'%s' %s" % (temp_line[0], len(temp_line))
+        fp = open(out_file, "w")
+        fp.write(out_str)
+        fp.close()
+        return
 
     # create huffman coding tools
     huff_tree = create_huff_tree(freqlist)
@@ -365,11 +382,7 @@ def shift_down(heap, i, size):
 
 
 def main(): # for testing purposes
-
-    freqlist = cnt_freq("test4.txt")
-    test_tree = create_huff_tree(freqlist)
-    print(tree_preord(test_tree))
-
+    pass
 
 if __name__ == "__main__":
     main()
